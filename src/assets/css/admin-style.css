@@ -1,26 +1,25 @@
 /**
  * Sistem Pengaduan Online - Admin Style
- * Minimalist Dashboard Design
+ * Minimalist List View Design
  * © 2025 Dafa al hafiz - 24_0085
  */
 
 :root {
     --sidebar-width: 260px;
     --topbar-height: 60px;
-    --primary-blue: #065fd4;
-    --primary-dark: #0b5ed7;
-    --text-primary: #030303;
-    --text-secondary: #606060;
-    --bg-light: #f9f9f9;
-    --border-color: #e5e5e5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --bg-page: #ffffff;
+    --border-color: #e0e0e0;
 }
 
 /* Admin Body */
 .admin-body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-light);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
 }
 
 /* Sidebar */
@@ -30,7 +29,7 @@
     top: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background-color: white;
+    background-color: #fafafa;
     border-right: 1px solid var(--border-color);
     z-index: 1000;
     display: flex;
@@ -49,12 +48,13 @@
     gap: 0.75rem;
     text-decoration: none;
     color: var(--text-primary);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
 .sidebar-brand i {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
 }
 
 .sidebar-nav {
@@ -70,29 +70,31 @@
     padding: 0.75rem 1.5rem;
     text-decoration: none;
     color: var(--text-secondary);
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-weight: 400;
+    font-size: 0.95rem;
+    transition: all 0.15s ease;
 }
 
 .sidebar-link:hover {
-    background-color: rgba(6, 95, 212, 0.05);
-    color: var(--primary-blue);
+    background-color: #f0f0f0;
+    color: var(--text-primary);
 }
 
 .sidebar-link.active {
-    background-color: rgba(6, 95, 212, 0.1);
-    color: var(--primary-blue);
-    border-left: 3px solid var(--primary-blue);
+    background-color: #e8e8e8;
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 .sidebar-link i {
-    font-size: 1.25rem;
-    width: 24px;
+    font-size: 1.1rem;
+    width: 20px;
 }
 
 .sidebar-divider {
     margin: 0.5rem 1.5rem;
     border-color: var(--border-color);
+    opacity: 0.5;
 }
 
 /* Main Content */
@@ -108,7 +110,7 @@
     position: sticky;
     top: 0;
     height: var(--topbar-height);
-    background-color: white;
+    background-color: var(--bg-page);
     border-bottom: 1px solid var(--border-color);
     padding: 0 2rem;
     display: flex;
@@ -120,18 +122,216 @@
 .admin-content {
     flex: 1;
     padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .content-header {
     margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.content-header p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Remove Card Styling - Use Simple List View */
+.card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    background: transparent;
+    border: none;
+    padding: 0 0 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.card-header h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.card-body {
+    padding: 0;
+    background: transparent;
+}
+
+/* Statistics - Simple List Style */
+.row.g-3 {
+    gap: 0;
+}
+
+.row.g-3 .card {
+    margin-bottom: 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.row.g-3 .card:last-child {
+    border-bottom: none;
+}
+
+.row.g-3 .card-body {
+    padding: 0;
+}
+
+.row.g-3 .card-body h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.row.g-3 .card-body p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Remove colored backgrounds and icons */
+.bg-primary, .bg-warning, .bg-info, .bg-success,
+.bg-opacity-10, .bg-light {
+    background: transparent !important;
+}
+
+.text-primary, .text-warning, .text-info, .text-success {
+    color: var(--text-primary) !important;
+}
+
+/* Hide decorative icons in stats */
+.row.g-3 .p-3.rounded {
+    display: none;
+}
+
+/* Tables */
+.table-responsive {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.table thead {
+    background-color: #fafafa;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table thead th {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+}
+
+.table tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* Status Badges - Minimal */
+.badge {
+    font-weight: 400;
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-primary);
+}
+
+.badge i {
+    display: none;
+}
+
+/* Buttons - Minimal */
+.btn {
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-primary);
+    transition: all 0.15s ease;
+}
+
+.btn:hover {
+    background-color: #f5f5f5;
+    border-color: var(--text-secondary);
+}
+
+.btn-primary {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: white;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
+}
+
+/* Remove shadows */
+.shadow, .shadow-sm, .shadow-lg {
+    box-shadow: none !important;
 }
 
 /* Footer */
 .admin-footer {
-    background-color: white;
+    background-color: transparent;
     border-top: 1px solid var(--border-color);
     padding: 1.5rem 2rem;
-    margin-top: auto;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
 }
 
 /* Mobile Responsive */
@@ -147,38 +347,32 @@
     .admin-main {
         margin-left: 0;
     }
+    
+    .admin-content {
+        padding: 1rem;
+    }
 }
 
-/* Cards */
-.card {
-    border-radius: 8px;
+/* Remove Alert Colors */
+.alert {
+    background-color: #fafafa;
     border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
-/* Tables in Admin */
-.table thead {
-    background-color: var(--bg-light);
+.alert-danger, .alert-success, .alert-warning, .alert-info {
+    background-color: #fafafa;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
-/* Status Badge Styling */
-.badge {
-    font-weight: 500;
-    padding: 0.35rem 0.75rem;
-    border-radius: 4px;
+/* Clean up category breakdown */
+.bg-light.rounded {
+    background-color: transparent !important;
+    border: 1px solid var(--border-color);
+    padding: 1rem !important;
 }
 
-/* Buttons */
-.btn {
-    border-radius: 4px;
-    font-weight: 500;
-}
-
-.btn-primary {
-    background-color: var(--primary-blue);
-    border-color: var(--primary-blue);
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+.bg-light.rounded i {
+    color: var(--text-primary) !important;
 }
