@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS pengaduan (
     nama_pelapor VARCHAR(100) DEFAULT 'Anonim',
     email VARCHAR(100),
     telepon VARCHAR(20),
+    file_bukti VARCHAR(255),
     status ENUM('Menunggu', 'Diproses', 'Selesai', 'Ditolak') DEFAULT 'Menunggu',
     tanggal_dibuat DATETIME DEFAULT CURRENT_TIMESTAMP,
     tanggal_diperbarui DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -33,9 +34,9 @@ CREATE TABLE IF NOT EXISTS admin (
 
 -- Insert default admin
 -- Username: admin
--- Password: admin123
+-- Password: admin123 (hashed dengan PHP password_hash)
 INSERT INTO admin (username, password, nama_lengkap, email) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin@pengaduan.local');
+('admin', '$2y$10$YJdHVdzKaOCnE7Ql8N9pweF7HtJhGmJcLqI7lTT.5O8xhxMh.XF3O', 'Administrator', 'admin@pengaduan.local');
 
 -- Insert sample data pengaduan untuk testing
 INSERT INTO pengaduan (nomor_tiket, judul, deskripsi, kategori, nama_pelapor, email, status, tanggal_dibuat) VALUES

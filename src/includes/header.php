@@ -19,20 +19,19 @@
 <!-- Public Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
     <div class="container-fluid px-4">
-        <a class="navbar-brand d-flex align-items-center" href="<?php echo BASE_URL; ?>">
-            <i class="bi bi-megaphone-fill text-primary me-2" style="font-size: 24px;"></i>
-            <span class="fw-semibold"><?php echo APP_NAME; ?></span>
+        <a class="navbar-brand fw-semibold" href="<?php echo BASE_URL; ?>">
+            <?php echo APP_NAME; ?>
         </a>
         
         <div class="d-flex gap-2">
             <a href="<?php echo BASE_URL; ?>/daftar-pengaduan.php" class="btn btn-sm btn-outline-primary">
-                <i class="bi bi-list-ul"></i> Daftar Pengaduan
+                Daftar Pengaduan
             </a>
             <a href="<?php echo BASE_URL; ?>/cek-pengaduan.php" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-search"></i> Cek Status
+                Cek Status
             </a>
             <a href="<?php echo BASE_URL; ?>/admin/login.php" class="btn btn-sm btn-primary">
-                <i class="bi bi-person-circle"></i> Admin
+                Admin
             </a>
         </div>
     </div>

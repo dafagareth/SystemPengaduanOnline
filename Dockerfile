@@ -6,5 +6,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Set working directory
 WORKDIR /var/www/html
 
+# Create uploads directory dengan permission
+RUN mkdir -p /var/www/html/uploads && chmod 777 /var/www/html/uploads
+
 # Expose port untuk PHP built-in server
 EXPOSE 8000

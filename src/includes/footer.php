@@ -1,15 +1,14 @@
 <!-- Footer -->
-<footer class="bg-white border-top mt-auto py-4">
+<footer class="bg-secondary bg-opacity-10 border-top mt-auto py-3">
     <div class="container-fluid px-4">
         <div class="row">
             <div class="col-md-6">
-                <p class="text-muted mb-0">
-                    <i class="bi bi-megaphone-fill text-primary me-2"></i>
+                <p class="text-muted mb-0 small">
                     <strong><?php echo APP_NAME; ?></strong> v<?php echo APP_VERSION; ?>
                 </p>
             </div>
             <div class="col-md-6 text-md-end">
-                <p class="text-muted mb-0"><?php echo COPYRIGHT; ?></p>
+                <p class="text-muted mb-0 small"><?php echo COPYRIGHT; ?></p>
             </div>
         </div>
     </div>
