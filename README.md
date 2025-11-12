@@ -95,15 +95,7 @@ SystemPengaduanOnline/
 │   └── includes/        # File konfigurasi (config.php), header, footer
 ├── Dockerfile           # Konfigurasi Image Docker PHP/Apache
 ├── docker-compose.yml   # Konfigurasi layanan Docker (Web dan DB)
-└── README.md            # File ini
-
-# 🔑 Akun Default (Admin)
-
-Gunakan kredensial berikut untuk login ke halaman admin:
-Peran	Username	admin
-Admin	admin	admin123
-
-    PERINGATAN: Segera ubah kredensial default ini di lingkungan produksi.
+└── README.md            # Panduan
 
 # 👥 Kontribusi
 
