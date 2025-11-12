@@ -1,0 +1,40 @@
+# Environment variables
+.env
+.env.local
+
+# Docker volumes
+mysql_data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# Composer (if used)
+vendor/
+composer.lock
+
+# Node modules (if used)
+node_modules/
+package-lock.json
+
+# Upload directories (if exist)
+uploads/
+files/
+
+# Cache
+cache/
+tmp/

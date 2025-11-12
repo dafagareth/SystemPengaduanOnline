@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # PHP Service dengan built-in server
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pengaduan_php
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+    command: php -S 0.0.0.0:8000 -t /var/www/html
+    networks:
+      - pengaduan_network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: pengaduan_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pengaduan_db
+      MYSQL_USER: pengaduan_user
+      MYSQL_PASSWORD: pengaduan_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - pengaduan_network
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pengaduan_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - pengaduan_network
+
+volumes:
+  mysql_data:
+
+networks:
+  pengaduan_network:
+    driver: bridge
