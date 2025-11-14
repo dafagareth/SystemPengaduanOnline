@@ -1,0 +1,339 @@
+/**
+ * Admin Login Page Style - Minimalist & Clean Design
+ * © 2025 Dafa al hafiz - 24_0085
+ */
+
+:root {
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --bg-page: #ffffff;
+    --bg-subtle: #fafafa;
+    --border-color: #e0e0e0;
+    --error-bg: #fff5f5;
+    --error-border: #fdd;
+    --error-text: #c33;
+}
+
+/* Login Page Body */
+body.login-page {
+    background-color: var(--bg-subtle);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    padding: 20px;
+    color: var(--text-primary);
+}
+
+/* Login Card Container */
+.login-card {
+    max-width: 420px;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card Styling */
+.login-card .card {
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    box-shadow: none;
+    background-color: var(--bg-page);
+}
+
+.login-card .card-body {
+    padding: 2.5rem;
+}
+
+/* Brand Section */
+.brand-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand-icon {
+    font-size: 48px;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    margin-top: 0;
+}
+
+.brand-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Form Elements */
+.login-form {
+    margin-bottom: 0;
+}
+
+.login-form .form-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.login-form .input-group {
+    display: flex;
+}
+
+.login-form .input-group-text {
+    background-color: transparent;
+    border-right: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+}
+
+.login-form .form-control {
+    border-left: none;
+    border: 1px solid var(--border-color);
+    border-radius: 0 4px 4px 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-form .form-control:focus {
+    border-color: var(--text-secondary);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+    outline: none;
+}
+
+.login-form .input-group:focus-within .input-group-text {
+    border-color: var(--text-secondary);
+}
+
+.login-form .form-control::placeholder {
+    color: #aaaaaa;
+}
+
+/* Login Button */
+.btn-login {
+    padding: 0.75rem 1.5rem;
+    font-weight: 400;
+    font-size: 0.95rem;
+    transition: all 0.15s ease;
+    border-radius: 4px;
+    background-color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    display: block;
+}
+
+.btn-login:hover:not(:disabled),
+.btn-login:focus:not(:disabled) {
+    background-color: #000000;
+    border-color: #000000;
+    color: white;
+}
+
+.btn-login:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-login .spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 2px;
+}
+
+/* Footer Link */
+.login-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.login-footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.15s ease;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+}
+
+.login-footer a:hover,
+.login-footer a:focus {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* Info Alert */
+.default-credentials {
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.default-credentials strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.default-credentials code {
+    background-color: var(--bg-page);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Copyright Footer */
+.login-copyright {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* Alert Styling */
+.login-form .alert {
+    border-radius: 4px;
+    border: 1px solid var(--error-border);
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.login-form .alert-danger {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error-text);
+}
+
+.login-form .alert i {
+    flex-shrink: 0;
+}
+
+/* Remove Bootstrap overrides */
+.login-card .border-0 {
+    border: 1px solid var(--border-color) !important;
+}
+
+.login-card .p-5 {
+    padding: 2.5rem !important;
+}
+
+/* Utility classes */
+.d-none {
+    display: none !important;
+}
+
+.me-1 {
+    margin-right: 0.25rem;
+}
+
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body.login-page {
+        padding: 15px;
+        background-color: var(--bg-page);
+    }
+    
+    .login-card {
+        max-width: 100%;
+    }
+    
+    .login-card .card {
+        border: none;
+    }
+    
+    .login-card .card-body {
+        padding: 2rem 1.5rem !important;
+    }
+    
+    .brand-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+    
+    .brand-icon {
+        font-size: 40px;
+    }
+    
+    .brand-title {
+        font-size: 1.25rem;
+    }
+    
+    .brand-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .default-credentials {
+        font-size: 0.8rem;
+    }
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 2px;
+}
+
+.btn-login:focus-visible {
+    outline: 2px solid white;
+    outline-offset: -4px;
+}
+
+/* Smooth transitions */
+* {
+    transition-timing-function: ease;
+}

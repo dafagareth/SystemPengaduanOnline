@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS admin (
 -- Username: admin
 -- Password: admin123 (hashed dengan PHP password_hash)
 INSERT INTO admin (username, password, nama_lengkap, email) VALUES
-('admin', '$2y$10$YJdHVdzKaOCnE7Ql8N9pweF7HtJhGmJcLqI7lTT.5O8xhxMh.XF3O', 'Administrator', 'admin@pengaduan.local');
+('admin', '$2y$10$YJdHVdzKaOCnE7Ql8N9pweF7HtJhGmJcLqI7lTT.5O8xhxMh.XF3O', 'Administrator', 'admin@pengaduan.local'),
+('dafa', '$2y$10$YJdHVdzKaOCnE7Ql8N9pweF7HtJhGmJcLqI7lTT.5O8xhxMh.XF3O', 'Administrator', 'admin0@pengaduan.local');
 
 -- Insert sample data pengaduan untuk testing
 INSERT INTO pengaduan (nomor_tiket, judul, deskripsi, kategori, nama_pelapor, email, status, tanggal_dibuat) VALUES

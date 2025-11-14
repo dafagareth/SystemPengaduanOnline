@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!in_array($file_type, $allowed_types)) {
             $errors[] = "Format file harus JPG, JPEG, atau MP4";
         } elseif ($file_size > $max_size) {
-            $errors[] = "Ukuran file maksimal 10MB";
+            $errors[] = "Ukuran file maksimal 2MB";
         } else {
             // Create uploads directory if not exists
             $upload_dir = __DIR__ . '/uploads/';
@@ -140,7 +140,7 @@ include 'includes/header.php';
                                 <li class="mb-2 text-muted">Pengaduan akan diproses maksimal 3x24 jam</li>
                                 <li class="mb-2 text-muted">Simpan nomor tiket untuk melacak status</li>
                                 <li class="mb-2 text-muted">Anda dapat mengirim secara anonim</li>
-                                <li class="text-muted">Upload bukti foto (JPG/JPEG) atau video (MP4) maksimal 10MB</li>
+                                <li class="text-muted">Upload bukti foto (JPG/JPEG) atau video (MP4) maksimal 2MB</li>
                             </ul>
                         </div>
                     </div>
@@ -247,7 +247,7 @@ include 'includes/header.php';
                                        id="file_bukti" 
                                        name="file_bukti"
                                        accept=".jpg,.jpeg,.mp4">
-                                <small class="text-muted">Format: JPG, JPEG, MP4 (Maks. 10MB)</small>
+                                <small class="text-muted">Format: JPG, JPEG, MP4 (Maks. 2MB)</small>
                             </div>
                             
                             <!-- Checkbox Anonim -->

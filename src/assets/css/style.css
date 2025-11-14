@@ -5,6 +5,7 @@
  */
 
 :root {
+    --footer: #0C2B4E;
     --text-primary: #1a1a1a;
     --text-secondary: #666666;
     --bg-page: #ffffff;
@@ -306,7 +307,7 @@ footer {
 }
 
 footer .text-muted {
-    color: var(--text-secondary) !important;
+    color: var(--footer) !important;
     font-size: 0.85rem;
 }
 
