@@ -86,16 +86,37 @@ Aplikasi sekarang dapat diakses melalui browser:
 
 Berikut adalah struktur direktori utama project ini:
 
-SystemPengaduanOnline/
+    SystemPengaduanOnline/
 ├── sql/
-│   └── init.sql         # Skema dan data awal database
+│   └── init.sql ✅                        # Database schema
 ├── src/
-│   ├── admin/           # Folder untuk dashboard dan logika admin
-│   ├── assets/          # CSS, JS, Gambar, dll.
-│   └── includes/        # File konfigurasi (config.php), header, footer
-├── Dockerfile           # Konfigurasi Image Docker PHP/Apache
-├── docker-compose.yml   # Konfigurasi layanan Docker (Web dan DB)
-└── README.md            # Panduan
+│   ├── admin/
+│   │   ├── dashboard.php                  # Admin dashboard
+│   │   ├── pengaduan.php                  # Kelola pengaduan
+│   │   ├── detail-pengaduan.php           # Detail & update
+│   │   ├── export-csv.php                 # Export data
+│   │   ├── login.php                      # Login page
+│   │   └── logout.php                     # Logout handler
+│   ├── assets/
+│   │   ├── css/
+│   │   │   ├── style.css                  # Public styles
+│   │   │   ├── admin-style.css            # Admin styles
+│   │   │   └── login-style.css            # Login styles
+│   │   └── js/
+│   ├── includes/
+│   │   ├── config.php                     # Configuration
+│   │   ├── functions.php                  # Helper functions
+│   │   ├── header.php                     # Public header
+│   │   ├── footer.php                     # Public footer
+│   │   ├── admin-header.php               # Admin header
+│   │   └── admin-footer.php               # Admin footer
+│   ├── uploads/                           # File uploads
+│   ├── index.php                          # Form pengaduan
+│   ├── cek-pengaduan.php                  # Cek status
+│   └── daftar-pengaduan.php               # Daftar pengaduan
+├── Dockerfile                             # PHP image config
+├── docker-compose.yml                     # Multi-container setup
+└── README.md                              # Project docs
 
 # 👥 Kontribusi
 

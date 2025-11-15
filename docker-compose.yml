@@ -1,58 +1,288 @@
+# ==============================================================================
+# DOCKER COMPOSE CONFIGURATION
+# ==============================================================================
+# File: docker-compose.yml
+# Deskripsi: Konfigurasi multi-container Docker untuk Sistem Pengaduan Online
+# Services:
+#   1. PHP Service (Web Server dengan built-in PHP server)
+#   2. MySQL Database
+#   3. phpMyAdmin (Database Management Tool)
+# Author: Dafa al hafiz - 24_0085
+# Tanggal: 2025
+# ==============================================================================
+
+# Docker Compose version
+# Version 3.8: Stable version dengan fitur lengkap
 version: '3.8'
 
+# ==============================================================================
+# SERVICES DEFINITION
+# ==============================================================================
+# Services: Container-container yang akan di-run
 services:
-  # PHP Service dengan built-in server
+
+  # ============================================================================
+  # SERVICE 1: PHP WEB SERVER
+  # ============================================================================
+  # Service untuk menjalankan aplikasi PHP dengan built-in web server
+  # Port: 8000 (akses via http://localhost:8000)
+  # ============================================================================
   php:
+    # ==========================================================================
+    # BUILD CONFIGURATION
+    # ==========================================================================
+    # Build image dari Dockerfile custom (bukan pull dari Docker Hub)
     build:
+      # Context: Directory yang berisi Dockerfile
+      # . = current directory (root project)
       context: .
+      
+      # Dockerfile name (default: Dockerfile)
       dockerfile: Dockerfile
+    
+    # ==========================================================================
+    # CONTAINER SETTINGS
+    # ==========================================================================
+    # Container name: Nama custom untuk container (bukan random)
+    # Berguna untuk docker logs, docker exec, etc
     container_name: pengaduan_php
+    
+    # ==========================================================================
+    # PORT MAPPING
+    # ==========================================================================
+    # Format: "HOST_PORT:CONTAINER_PORT"
+    # 8000:8000 = Port 8000 di host → Port 8000 di container
+    # Akses aplikasi: http://localhost:8000
     ports:
       - "8000:8000"
+    
+    # ==========================================================================
+    # VOLUME MOUNTING
+    # ==========================================================================
+    # Mount local directory ke container (untuk hot reload)
+    # Format: "HOST_PATH:CONTAINER_PATH"
+    # ./src:/var/www/html = Folder src di host → /var/www/html di container
+    # Benefit: Edit code di host langsung terlihat di container (no rebuild)
     volumes:
       - ./src:/var/www/html
+    
+    # ==========================================================================
+    # DEPENDENCIES
+    # ==========================================================================
+    # depends_on: Service ini memerlukan service lain running dulu
+    # PHP service memerlukan MySQL running sebelum start
+    # Note: depends_on tidak guarantee MySQL "ready", hanya "started"
     depends_on:
       - mysql
+    
+    # ==========================================================================
+    # STARTUP COMMAND
+    # ==========================================================================
+    # Command yang di-run saat container start
+    # php -S 0.0.0.0:8000 -t /var/www/html
+    # Breakdown:
+    #   -S 0.0.0.0:8000  : Start built-in server, listen di semua interface, port 8000
+    #   -t /var/www/html : Document root (base directory untuk serve files)
     command: php -S 0.0.0.0:8000 -t /var/www/html
+    
+    # ==========================================================================
+    # NETWORK
+    # ==========================================================================
+    # Connect ke custom network untuk inter-container communication
     networks:
       - pengaduan_network
 
-  # MySQL Database
+  # ============================================================================
+  # SERVICE 2: MySQL DATABASE
+  # ============================================================================
+  # Service database MySQL untuk menyimpan data aplikasi
+  # Port: 3306 (akses via localhost:3306)
+  # ============================================================================
   mysql:
+    # ==========================================================================
+    # IMAGE
+    # ==========================================================================
+    # Pull official MySQL image dari Docker Hub
+    # Version: 8.0 (LTS version)
     image: mysql:8.0
+    
+    # ==========================================================================
+    # CONTAINER SETTINGS
+    # ==========================================================================
+    # Container name untuk identifikasi
     container_name: pengaduan_mysql
+    
+    # ==========================================================================
+    # ENVIRONMENT VARIABLES
+    # ==========================================================================
+    # Environment variables untuk konfigurasi MySQL
     environment:
+      # Root password: Password untuk user root
+      # SECURITY WARNING: Ganti di production!
       MYSQL_ROOT_PASSWORD: root
+      
+      # Database name: Database yang otomatis dibuat saat first run
+      # Database ini yang digunakan oleh aplikasi
       MYSQL_DATABASE: pengaduan_db
+      
+      # User: User MySQL yang otomatis dibuat
+      # User ini memiliki full access ke database pengaduan_db
       MYSQL_USER: pengaduan_user
+      
+      # Password: Password untuk user di atas
+      # SECURITY WARNING: Ganti di production!
       MYSQL_PASSWORD: pengaduan_pass
+    
+    # ==========================================================================
+    # PORT MAPPING
+    # ==========================================================================
+    # 3306:3306 = Port MySQL standard
+    # Bisa connect dari host via: mysql -h localhost -P 3306 -u pengaduan_user -p
     ports:
       - "3306:3306"
+    
+    # ==========================================================================
+    # VOLUME MOUNTING
+    # ==========================================================================
+    # Mount untuk persistence dan initialization
     volumes:
+      # Volume 1: Data persistence
+      # mysql_data:/var/lib/mysql
+      # - mysql_data = named volume (defined di bagian volumes di bawah)
+      # - /var/lib/mysql = direktori default MySQL untuk menyimpan data
+      # - Benefit: Data tidak hilang saat container di-restart/recreate
       - mysql_data:/var/lib/mysql
+      
+      # Volume 2: Initialization script
+      # ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - Mount init.sql ke directory khusus MySQL
+      # - /docker-entrypoint-initdb.d/ = directory yang otomatis di-execute saat first run
+      # - File .sql di sini akan di-run otomatis untuk setup database
+      # - Hanya jalan sekali (saat pertama kali database dibuat)
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+    # ==========================================================================
+    # NETWORK
+    # ==========================================================================
+    # Connect ke custom network untuk communication dengan PHP service
     networks:
       - pengaduan_network
 
-  # phpMyAdmin
+  # ============================================================================
+  # SERVICE 3: phpMyAdmin
+  # ============================================================================
+  # Service phpMyAdmin untuk management database via web interface
+  # Port: 8090 (akses via http://localhost:8090)
+  # ============================================================================
   phpmyadmin:
+    # ==========================================================================
+    # IMAGE
+    # ==========================================================================
+    # Pull official phpMyAdmin image dari Docker Hub
     image: phpmyadmin/phpmyadmin
+    
+    # ==========================================================================
+    # CONTAINER SETTINGS
+    # ==========================================================================
+    # Container name untuk identifikasi
     container_name: pengaduan_phpmyadmin
+    
+    # ==========================================================================
+    # ENVIRONMENT VARIABLES
+    # ==========================================================================
+    # Environment variables untuk konfigurasi phpMyAdmin
     environment:
+      # PMA_HOST: MySQL host yang akan diconnect
+      # 'mysql' = nama service MySQL (Docker DNS resolution)
       PMA_HOST: mysql
+      
+      # PMA_PORT: MySQL port
+      # 3306 = default MySQL port
       PMA_PORT: 3306
+      
+      # PMA_USER: Default user untuk login (optional)
+      # Auto-fill username di login form
       PMA_USER: root
+      
+      # PMA_PASSWORD: Default password untuk login (optional)
+      # Auto-fill password di login form
       PMA_PASSWORD: root
+    
+    # ==========================================================================
+    # PORT MAPPING
+    # ==========================================================================
+    # 8090:80 = Port 8090 di host → Port 80 di container
+    # Akses phpMyAdmin: http://localhost:8090
+    # Port 80 adalah default port untuk phpMyAdmin container
     ports:
       - "8090:80"
+    
+    # ==========================================================================
+    # DEPENDENCIES
+    # ==========================================================================
+    # phpMyAdmin memerlukan MySQL running sebelum start
     depends_on:
       - mysql
+    
+    # ==========================================================================
+    # NETWORK
+    # ==========================================================================
+    # Connect ke network yang sama dengan MySQL untuk bisa communicate
     networks:
       - pengaduan_network
 
+# ==============================================================================
+# VOLUMES DEFINITION
+# ==============================================================================
+# Named volumes: Persistent storage yang di-manage oleh Docker
+# Volume ini tidak hilang meskipun container di-remove
+# ==============================================================================
 volumes:
+  # MySQL data volume
+  # Menyimpan semua data MySQL (databases, tables, rows)
+  # Location di host: Docker managed (biasanya /var/lib/docker/volumes/)
+  # Benefit: Data persist meskipun container di-recreate
   mysql_data:
 
+# ==============================================================================
+# NETWORKS DEFINITION
+# ==============================================================================
+# Custom networks: Untuk inter-container communication
+# ==============================================================================
 networks:
+  # Custom bridge network
+  # Bridge driver: Default driver untuk single-host networking
+  # Benefit:
+  # - Isolation: Hanya container di network ini yang bisa communicate
+  # - DNS resolution: Container bisa refer satu sama lain by service name
+  #   Contoh: PHP service bisa connect ke MySQL via hostname 'mysql'
   pengaduan_network:
     driver: bridge
+
+# ==============================================================================
+# CARA PENGGUNAAN
+# ==============================================================================
+# 
+# 1. Start semua services:
+#    $ docker-compose up -d
+#    (-d flag untuk detached mode / run di background)
+# 
+# 2. Stop semua services:
+#    $ docker-compose down
+# 
+# 3. Stop dan hapus volumes (WARNING: Data akan hilang):
+#    $ docker-compose down -v
+# 
+# 4. Rebuild images (jika ada perubahan di Dockerfile):
+#    $ docker-compose up -d --build
+# 
+# 5. View logs:
+#    $ docker-compose logs -f
+#    (Specific service: docker-compose logs -f php)
+# 
+# 6. Access services:
+#    - Aplikasi PHP: http://localhost:8000
+#    - phpMyAdmin: http://localhost:8090
+#    - MySQL: localhost:3306
+# 
+# ==============================================================================
