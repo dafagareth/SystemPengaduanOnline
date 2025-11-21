@@ -4,7 +4,7 @@ Sistem Informasi Pengaduan Masyarakat Online **(SIPMO)** adalah aplikasi berbasi
 
 ---
 
-# ⚙️ Fitur Utama
+    # ⚙️ Fitur Utama
 
 - **Pengaduan Anonim / Terautentikasi** — Pengguna dapat membuat laporan tanpa akun maupun dengan login.
 - **Status Pelaporan** — Pantau perkembangan pengaduan: *Pending*, *Diproses*, *Selesai*.
@@ -63,7 +63,7 @@ SOURCE /path/to/sql/init.sql;
 
 ---
 
-# 📦 Struktur Direktori Project
+# Struktur Project
 ```
 SystemPengaduanOnline/
 ├── sql/
